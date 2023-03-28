@@ -7,29 +7,29 @@ namespace Caesar
 {
     class FilesWork
     {
-        public static string ReadTextFile(string filePath)
+        public static string ReadTextFile(string filePath) // Функція зчитування тексту з файлу приймає шлях до файлу
         {
-            string fileContents = "";
+            string fileContents = ""; // Текст файлу
 
-            try
+            try //Спроба зчитати файл
             {
-                fileContents = File.ReadAllText(filePath);
+                fileContents = File.ReadAllText(filePath); //Зчитування файлу
             }
             catch (FileNotFoundException)
             {
-                throw new FileNotFoundException("File not found");
+                throw new FileNotFoundException("File not found"); //Помилка незнаходження файлу
             }
             catch (Exception)
             {
-                throw new Exception("Problems with file");
+                throw new Exception("Problems with file"); //Інші помилки
             }
 
-            return fileContents;
+            return fileContents; //Повернення тексту
         }
 
-        public static void LoadTextFile(string fileContents, string filePath)
+        public static void LoadTextFile(string fileContents, string filePath) //Функція запису тексту приймає шлях до файлу його зміст
         {
-            File.WriteAllText(filePath, fileContents);
+            File.WriteAllText(filePath, fileContents); //Запис тексту
         }
     }
 }

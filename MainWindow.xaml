@@ -5,9 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Caesar"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="850">
     <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF77C6F6" Offset="1"/>
+                <GradientStop Color="White" Offset="0.314"/>
+            </LinearGradientBrush>
+        </Grid.Background>
         <Button Name ="InfoButton" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="100" Height="40" Click="InfoButton_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF3D8FC0" Offset="0.827"/>
+                    <GradientStop Color="#FF77C6F6" Offset="0.447"/>
+                </LinearGradientBrush>
+            </Button.Background>
             <StackPanel Orientation="Vertical" IsEnabled="False">
                 <TextBlock TextWrapping="Wrap">
             <Run Text="Інформація про" />
@@ -21,12 +33,18 @@
         <TextBlock x:Name ="InfoBlock" HorizontalAlignment="Center" Margin="0,132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="119" Width="303" FontSize="20" TextAlignment="Center" Visibility="Hidden">
             <Run Text="Студентка 2-го курсу"/>
             <LineBreak/>
-            <Run Text="Групи ТВ-12"/>
+            <Run Text="Групи ТР-12"/>
             <LineBreak/>
             <Run Text="Ангеліна Забловська"/>
         </TextBlock>
 
         <Button Name ="EncryptTextButton" HorizontalAlignment="Left" Margin="100,0,0,0" VerticalAlignment="Top" Width="100" Height="40" Click="EncryptTextButton_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF3D8FC0" Offset="0.827"/>
+                    <GradientStop Color="#FF77C6F6" Offset="0.447"/>
+                </LinearGradientBrush>
+            </Button.Background>
             <StackPanel Orientation="Vertical">
                 <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center">
             <Run Text="Шифрування" />
@@ -44,6 +62,12 @@
         <TextBox Name ="EncryptText_EncryptedText" HorizontalAlignment="Left" Margin="100,289,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="110" Width="376" Visibility="Hidden"/>
 
         <Button Name ="DecryptTextButton" HorizontalAlignment="Left" Margin="200,0,0,0" VerticalAlignment="Top" Width="100" Height="40" Click="DecryptTextButton_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF3D8FC0" Offset="0.827"/>
+                    <GradientStop Color="#FF77C6F6" Offset="0.447"/>
+                </LinearGradientBrush>
+            </Button.Background>
             <StackPanel Orientation="Vertical">
                 <TextBlock TextWrapping="Wrap">
             <Run Text="Розшифрування" />
@@ -62,6 +86,12 @@
         <TextBox Name ="DecryptText_DecryptedText" HorizontalAlignment="Left" Margin="100,289,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="110" Width="376" Visibility="Hidden"/>
 
         <Button Name ="EncryptFileButton" HorizontalAlignment="Left" Margin="300,0,0,0" VerticalAlignment="Top" Width="100" Height="40" Click="EncryptFileButton_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF3D8FC0" Offset="0.827"/>
+                    <GradientStop Color="#FF77C6F6" Offset="0.447"/>
+                </LinearGradientBrush>
+            </Button.Background>
             <StackPanel Orientation="Vertical">
                 <TextBlock TextWrapping="Wrap">
             <Run Text="Шифрування" />
@@ -72,14 +102,41 @@
             </StackPanel>
         </Button>
 
-        <Button Name = "EncryptFile_ChooseInputButton" Content="Вибір&#xD;&#xA;файлу" HorizontalAlignment="Left" Margin="100,88,0,0" VerticalAlignment="Top" Height="40" Width="100" Click="EncryptFile_ChooseInputButton_Click" Visibility="Hidden"/>
+        <Button Name = "EncryptFile_ChooseInputButton" Content="Вибір&#xD;&#xA;файлу" HorizontalAlignment="Left" Margin="100,88,0,0" VerticalAlignment="Top" Height="40" Width="100" Click="EncryptFile_ChooseInputButton_Click" Visibility="Hidden">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF3D8FC0" Offset="0.827"/>
+                    <GradientStop Color="#FF77C6F6" Offset="0.447"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
         <TextBox Name = "EncryptFile_KeyText" HorizontalAlignment="Left" Margin="200,158,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Visibility="Hidden" TextChanged="EncryptFile_KeyText_TextChanged"/>
         <TextBlock Name = "EncryptFile_Key" HorizontalAlignment="Left" Margin="135,159,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.442,-0.261" Visibility="Hidden"><Run Language="ru-ru" Text="Ключ"/></TextBlock>
-        <Button Name = "EncryptFile_ChooseOutputButton" Content="Вибір папки &#xD;&#xA;для результату " HorizontalAlignment="Left" Margin="100,211,0,0" VerticalAlignment="Top" Height="40" Width="100" Click="EncryptFile_ChooseOutputButton_Click" Visibility="Hidden"/>
-        <Button  Name = "EncryptFile_EncryptButton"  Content="Зашифрувати" HorizontalAlignment="Left" Margin="640,344,0,0" VerticalAlignment="Top" Width="100" Height="40" Click="EncryptFile_EncryptButton_Click" Visibility="Hidden"/>
+        <Button Name = "EncryptFile_ChooseOutputButton" Content="Вибір папки &#xD;&#xA;для результату " HorizontalAlignment="Left" Margin="100,211,0,0" VerticalAlignment="Top" Height="40" Width="100" Click="EncryptFile_ChooseOutputButton_Click" Visibility="Hidden">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF3D8FC0" Offset="0.827"/>
+                    <GradientStop Color="#FF77C6F6" Offset="0.447"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button  Name = "EncryptFile_EncryptButton"  Content="Зашифрувати" HorizontalAlignment="Left" Margin="640,344,0,0" VerticalAlignment="Top" Width="100" Height="40" Click="EncryptFile_EncryptButton_Click" Visibility="Hidden">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF3D8FC0" Offset="0.827"/>
+                    <GradientStop Color="#FF77C6F6" Offset="0.447"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
 
 
         <Button Name ="DecryptFileButton" HorizontalAlignment="Left" Margin="400,0,0,0" VerticalAlignment="Top" Width="100" Height="40" Click="DecryptFileButton_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF3D8FC0" Offset="0.827"/>
+                    <GradientStop Color="#FF77C6F6" Offset="0.447"/>
+                </LinearGradientBrush>
+            </Button.Background>
             <StackPanel Orientation="Vertical">
                 <TextBlock TextWrapping="Wrap">
             <Run Text="Розшифрування" />
@@ -90,14 +147,41 @@
             </StackPanel>
         </Button>
 
-        <Button Name = "DecryptFile_ChooseInputButton" Content="Вибір&#xD;&#xA;файлу" HorizontalAlignment="Left" Margin="100,88,0,0" VerticalAlignment="Top" Height="40" Width="100" Click="DecryptFile_ChooseInputButton_Click" Visibility="Hidden"/>
+        <Button Name = "DecryptFile_ChooseInputButton" Content="Вибір&#xD;&#xA;файлу" HorizontalAlignment="Left" Margin="100,88,0,0" VerticalAlignment="Top" Height="40" Width="100" Click="DecryptFile_ChooseInputButton_Click" Visibility="Hidden">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF3D8FC0" Offset="0.827"/>
+                    <GradientStop Color="#FF77C6F6" Offset="0.447"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
         <TextBox Name = "DecryptFile_KeyText" HorizontalAlignment="Left" Margin="200,158,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="DecryptFile_KeyText_TextChanged" Visibility="Hidden"/>
         <TextBlock Name = "DecryptFile_Key" HorizontalAlignment="Left" Margin="135,159,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.442,-0.261" Visibility="Hidden"><Run Language="ru-ru" Text="Ключ"/></TextBlock>
-        <Button Name = "DecryptFile_ChooseOutputButton" Content="Вибір папки &#xD;&#xA;для результату " HorizontalAlignment="Left" Margin="100,211,0,0" VerticalAlignment="Top" Height="40" Width="100" Click="DecryptFile_ChooseOutputButton_Click" Visibility="Hidden"/>
-        <Button  Name = "DecryptFile_DecryptButton"  Content="Розшифрувати" HorizontalAlignment="Left" Margin="640,344,0,0" VerticalAlignment="Top" Width="100" Height="40" Click="DecryptFile_DecryptButton_Click" Visibility="Hidden"/>
+        <Button Name = "DecryptFile_ChooseOutputButton" Content="Вибір папки &#xD;&#xA;для результату " HorizontalAlignment="Left" Margin="100,211,0,0" VerticalAlignment="Top" Height="40" Width="100" Click="DecryptFile_ChooseOutputButton_Click" Visibility="Hidden">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF3D8FC0" Offset="0.827"/>
+                    <GradientStop Color="#FF77C6F6" Offset="0.447"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button  Name = "DecryptFile_DecryptButton"  Content="Розшифрувати" HorizontalAlignment="Left" Margin="640,344,0,0" VerticalAlignment="Top" Width="100" Height="40" Click="DecryptFile_DecryptButton_Click" Visibility="Hidden">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF3D8FC0" Offset="0.827"/>
+                    <GradientStop Color="#FF77C6F6" Offset="0.447"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
 
 
         <Button Name ="ExitButton" HorizontalAlignment="Right" Margin="700,0,0,0" VerticalAlignment="Top" Width="100" Height="40" Click="ExitButton_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF3D8FC0" Offset="0.827"/>
+                    <GradientStop Color="#FF77C6F6" Offset="0.447"/>
+                </LinearGradientBrush>
+            </Button.Background>
             <StackPanel Orientation="Vertical">
                 <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center">
             <Run Text="Вихід з" />
@@ -107,8 +191,5 @@
                 </TextBlock>
             </StackPanel>
         </Button>
-        <Expander Header="Expander" HorizontalAlignment="Left" Height="100" Margin="200,211,0,0" VerticalAlignment="Top" Width="100">
-            <Grid Background="#FFE5E5E5"/>
-        </Expander>
     </Grid>
 </Window>
