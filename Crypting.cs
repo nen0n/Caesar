@@ -6,75 +6,53 @@ namespace Caesar
 {
     class Crypting
     {
-        static int PowerOfByte = 255;
-        static int PowerOfUnicode = 65536;
-        public static void EncryptNonText(string originalFile, string encryptedPath, int key)
+        public enum Crypt 
         {
-            string encryptedFile = encryptedPath + @"\encrypted" + Path.GetExtension(originalFile);
-            byte[] originalBytes = File.ReadAllBytes(originalFile);
-            byte[] encryptedBytes = new byte[originalBytes.Length];
-
-            if(Path.GetExtension(originalFile) == ".txt")
-            {
-                FilesWork.LoadTextFile(Crypting.EncryptText(FilesWork.ReadTextFile(originalFile), key), encryptedFile);
-                return;
-            }
-
-
-            for (int i = 0; i < originalBytes.Length; i++)
-            {
-                encryptedBytes[i] = (byte)(originalBytes[i] + key % 255);
-            }
-
-            File.WriteAllBytes(encryptedFile, encryptedBytes);
+            Encrypt,
+            Decrypt
         }
 
-        public static void DecryptNonText(string encryptedFile, string originalPath, int key)
+        public static void CryptNonText(Crypt crypt, string inputFile, string outputPath, int key)
         {
-            string originalFile = originalPath + @"\decrypted" + Path.GetExtension(encryptedFile);
-            byte[] encryptedBytes = File.ReadAllBytes(encryptedFile);
-            byte[] originalBytes = new byte[encryptedBytes.Length];
+            string outputFile = outputPath + @"\output" + Path.GetExtension(inputFile);
+            byte[] inputBytes = File.ReadAllBytes(inputFile);
+            byte[] outputBytes = new byte[inputBytes.Length];
 
-            if (Path.GetExtension(encryptedFile) == ".txt")
+            if (crypt == Crypt.Encrypt)
             {
-                FilesWork.LoadTextFile(Crypting.DecryptText(FilesWork.ReadTextFile(encryptedFile), key), originalFile);
-                return;
+                for (int i = 0; i < inputBytes.Length; i++)
+                {
+                    outputBytes[i] = (byte)(inputBytes[i] + key % 255);
+                }
             }
-
-            for (int i = 0; i < encryptedBytes.Length; i++)
+            else
             {
-                originalBytes[i] = (byte)(encryptedBytes[i] - key % 255);
-            }
-
-            File.WriteAllBytes(originalFile, originalBytes);
+                for (int i = 0; i < inputBytes.Length; i++)
+                {
+                    outputBytes[i] = (byte)(inputBytes[i] - key % 255);
+                }
+            }    
+            File.WriteAllBytes(outputFile, outputBytes);
         }
 
-        public static string EncryptText(string plainText, int key)
+        public static string CryptText(Crypt crypt, string inputText, int key)
         {
-            string cipherText = "";
-
-            foreach (char c in plainText)
+            string outputText = "";
+            if (crypt == Crypt.Encrypt)
             {
-                int charCode = c;
-                charCode = (charCode + key) % PowerOfUnicode;
-                cipherText += (char)charCode;
+                foreach (char c in inputText)
+                {
+                    outputText += (char)((c + key) % 65536);
+                }
             }
-
-            return cipherText;
-        }
-
-        public static string DecryptText(string cipherText, int key)
-        {
-            string plainText = "";
-
-            foreach (char c in cipherText)
+            else
             {
-                int charCode = c;
-                charCode = (charCode + PowerOfUnicode - (key % PowerOfUnicode)) % PowerOfUnicode;
-                plainText += (char)charCode;
+                foreach (char c in inputText)
+                {
+                    outputText += (char)((c + 65536 - key) % 65536);
+                }
             }
-
-            return plainText;
+            return outputText;
         }
     }
 }

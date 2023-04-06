@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Caesar"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="850">
     <Grid>
         <Button Name ="InfoButton" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="100" Height="40" Click="InfoButton_Click">
             <StackPanel Orientation="Vertical" IsEnabled="False">
@@ -21,7 +21,7 @@
         <TextBlock x:Name ="InfoBlock" HorizontalAlignment="Center" Margin="0,132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="119" Width="303" FontSize="20" TextAlignment="Center" Visibility="Hidden">
             <Run Text="Студентка 2-го курсу"/>
             <LineBreak/>
-            <Run Text="Групи ТВ-12"/>
+            <Run Text="Групи ТР-12"/>
             <LineBreak/>
             <Run Text="Ангеліна Забловська"/>
         </TextBlock>
@@ -42,6 +42,7 @@
         <TextBox Name ="EncryptText_KeyText" HorizontalAlignment="Left" Margin="502,121,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" Visibility="Hidden" TextChanged="EncryptText_KeyText_TextChanged"/>
         <TextBlock Name ="EncryptText_Encrypt" HorizontalAlignment="Left" Margin="100,248,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.519,1.544" Text="Зашифрований текст:" Visibility="Hidden"/>
         <TextBox Name ="EncryptText_EncryptedText" HorizontalAlignment="Left" Margin="100,289,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="110" Width="376" Visibility="Hidden"/>
+        <Button Name ="EncryptText_Button" Content="Розшифрувати" HorizontalAlignment="Left" Height="34" Margin="502,289,0,0" VerticalAlignment="Top" Width="97" Click="EncryptText_Button_Click" Visibility="Hidden"/>
 
         <Button Name ="DecryptTextButton" HorizontalAlignment="Left" Margin="200,0,0,0" VerticalAlignment="Top" Width="100" Height="40" Click="DecryptTextButton_Click">
             <StackPanel Orientation="Vertical">
@@ -60,7 +61,8 @@
         <TextBox Name ="DecryptText_KeyText" HorizontalAlignment="Left" Margin="502,121,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" Visibility="Hidden" TextChanged="DecryptText_KeyText_TextChanged"/>
         <TextBlock x:Name ="DecryptText_Decrypt" HorizontalAlignment="Left" Margin="100,248,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.519,1.544" Visibility="Hidden"><Run Language="ru-ru" Text="Розшифрований текст:"/></TextBlock>
         <TextBox Name ="DecryptText_DecryptedText" HorizontalAlignment="Left" Margin="100,289,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="110" Width="376" Visibility="Hidden"/>
-
+        <Button Name ="DecryptText_Button" Content="Зашифрувати" HorizontalAlignment="Left" Height="34" Margin="502,289,0,0" VerticalAlignment="Top" Width="97" Click="DecryptText_Button_Click" Visibility="Hidden"/>
+        
         <Button Name ="EncryptFileButton" HorizontalAlignment="Left" Margin="300,0,0,0" VerticalAlignment="Top" Width="100" Height="40" Click="EncryptFileButton_Click">
             <StackPanel Orientation="Vertical">
                 <TextBlock TextWrapping="Wrap">
@@ -107,8 +109,5 @@
                 </TextBlock>
             </StackPanel>
         </Button>
-        <Expander Header="Expander" HorizontalAlignment="Left" Height="100" Margin="200,211,0,0" VerticalAlignment="Top" Width="100">
-            <Grid Background="#FFE5E5E5"/>
-        </Expander>
     </Grid>
 </Window>

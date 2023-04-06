@@ -26,6 +26,7 @@ namespace Caesar
             EncryptText_KeyText.Visibility = Visibility.Hidden;
             EncryptText_Text.Visibility = Visibility.Hidden;
             EncryptText_TextBlock.Visibility = Visibility.Hidden;
+            EncryptText_Button.Visibility = Visibility.Hidden;
 
             DecryptText_Decrypt.Visibility = Visibility.Hidden;
             DecryptText_DecryptedText.Visibility = Visibility.Hidden;
@@ -33,6 +34,7 @@ namespace Caesar
             DecryptText_KeyText.Visibility = Visibility.Hidden;
             DecryptText_Text.Visibility = Visibility.Hidden;
             DecryptText_TextBlock.Visibility = Visibility.Hidden;
+            DecryptText_Button.Visibility = Visibility.Hidden;
 
             DecryptFile_ChooseInputButton.Visibility = Visibility.Hidden;
             DecryptFile_ChooseOutputButton.Visibility = Visibility.Hidden;
@@ -91,10 +93,12 @@ namespace Caesar
         {
             if (EncryptText_Text.Text != "" && int.TryParse(EncryptText_KeyText.Text, out int key))
             {
-                EncryptText_EncryptedText.Text = Crypting.DecryptText(EncryptText_Text.Text, int.Parse(EncryptText_KeyText.Text));
+                EncryptText_Button.Visibility = Visibility.Visible;
+                EncryptText_EncryptedText.Text = Crypting.CryptText(Crypting.Crypt.Encrypt, EncryptText_Text.Text, int.Parse(EncryptText_KeyText.Text));
             }
             else
             {
+                EncryptText_Button.Visibility = Visibility.Hidden;
                 EncryptText_EncryptedText.Text = "";
             }
         }
@@ -103,10 +107,12 @@ namespace Caesar
         {
             if (EncryptText_Text.Text != "" && int.TryParse(EncryptText_KeyText.Text, out int key))
             {
-                EncryptText_EncryptedText.Text = Crypting.DecryptText(EncryptText_Text.Text, int.Parse(EncryptText_KeyText.Text));
+                EncryptText_Button.Visibility = Visibility.Visible;
+                EncryptText_EncryptedText.Text = Crypting.CryptText(Crypting.Crypt.Encrypt, EncryptText_Text.Text, int.Parse(EncryptText_KeyText.Text));
             }
             else
             {
+                EncryptText_Button.Visibility = Visibility.Hidden;
                 EncryptText_EncryptedText.Text = "";
             }
         }
@@ -128,10 +134,12 @@ namespace Caesar
         {
             if (DecryptText_Text.Text != "" && int.TryParse(DecryptText_KeyText.Text, out int key))
             {
-                DecryptText_DecryptedText.Text = Crypting.DecryptText(DecryptText_Text.Text, int.Parse(DecryptText_KeyText.Text));
+                DecryptText_Button.Visibility = Visibility.Visible;
+                DecryptText_DecryptedText.Text = Crypting.CryptText(Crypting.Crypt.Decrypt, DecryptText_Text.Text, int.Parse(DecryptText_KeyText.Text));
             }
             else
             {
+                DecryptText_Button.Visibility = Visibility.Hidden;
                 DecryptText_DecryptedText.Text = "";
             }
         }
@@ -140,10 +148,12 @@ namespace Caesar
         {
             if (DecryptText_Text.Text != "" && int.TryParse(DecryptText_KeyText.Text, out int key))
             {
-                DecryptText_DecryptedText.Text = Crypting.DecryptText(DecryptText_Text.Text, int.Parse(DecryptText_KeyText.Text));
+                DecryptText_Button.Visibility = Visibility.Visible;
+                DecryptText_DecryptedText.Text = Crypting.CryptText(Crypting.Crypt.Decrypt, DecryptText_Text.Text, int.Parse(DecryptText_KeyText.Text));
             }
             else
             {
+                DecryptText_Button.Visibility = Visibility.Hidden;
                 DecryptText_DecryptedText.Text = "";
             }
         }
@@ -206,7 +216,7 @@ namespace Caesar
         private void EncryptFile_EncryptButton_Click(object sender, RoutedEventArgs e)
         {
             AllInvisible();
-            Crypting.EncryptNonText(selectedInputFile, selectedOutputPath, int.Parse(EncryptFile_KeyText.Text));
+            Crypting.CryptNonText(Crypting.Crypt.Encrypt, selectedInputFile, selectedOutputPath, int.Parse(EncryptFile_KeyText.Text));
             AllClear();
         }
 
@@ -267,13 +277,35 @@ namespace Caesar
         private void DecryptFile_DecryptButton_Click(object sender, RoutedEventArgs e)
         {
             AllInvisible();
-            Crypting.DecryptNonText(selectedInputFile, selectedOutputPath, int.Parse(DecryptFile_KeyText.Text));
+            Crypting.CryptNonText(Crypting.Crypt.Decrypt, selectedInputFile, selectedOutputPath, int.Parse(DecryptFile_KeyText.Text));
             AllClear();
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        private void EncryptText_Button_Click(object sender, RoutedEventArgs e)
+        {
+            string key = EncryptText_KeyText.Text;
+            string text = EncryptText_EncryptedText.Text;
+            AllClear();
+            AllInvisible();
+            DecryptTextButton_Click(sender, e);
+            DecryptText_KeyText.Text = key;
+            DecryptText_Text.Text = text;
+        }
+
+        private void DecryptText_Button_Click(object sender, RoutedEventArgs e)
+        {
+            string key = DecryptText_KeyText.Text;
+            string text = DecryptText_DecryptedText.Text;
+            AllClear();
+            AllInvisible();
+            EncryptTextButton_Click(sender, e);
+            EncryptText_KeyText.Text = key;
+            EncryptText_Text.Text = text;
         }
     }
 }
