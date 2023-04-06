@@ -6,133 +6,92 @@ namespace Caesar
 {
     class Crypting
     {
-        static int PowerOfByte = 255; 
-        static int PowerOfUnicode = 65536; 
-        public static void EncryptNonText(string originalFile, string encryptedPath, int[] args) 
+        public enum Crypt
         {
-            string encryptedFile = encryptedPath + @"\encrypted" + Path.GetExtension(originalFile); 
-            byte[] originalBytes = File.ReadAllBytes(originalFile); 
-            byte[] encryptedBytes = new byte[originalBytes.Length]; 
-            if (Path.GetExtension(originalFile) == ".txt") 
-            {
-                FilesWork.LoadTextFile(Crypting.EncryptText(FilesWork.ReadTextFile(originalFile), args), encryptedFile); 
-                return;
-            }
-            for (int i = 0; i < originalBytes.Length; i++) 
-            {
-                encryptedBytes[i] = (byte)(originalBytes[i] + Equation(i, args) % 255); 
-            }
-            File.WriteAllBytes(encryptedFile, encryptedBytes); 
+            Encrypt,
+            Decrypt
         }
 
-        public static void DecryptNonText(string encryptedFile, string originalPath, int[] args)
+        public static void CryptNonText(Crypt crypt, string inputFile, string outputPath, object key) 
         {
-            string originalFile = originalPath + @"\decrypted" + Path.GetExtension(encryptedFile); 
-            byte[] encryptedBytes = File.ReadAllBytes(encryptedFile);
-            byte[] originalBytes = new byte[encryptedBytes.Length]; 
-            if (Path.GetExtension(encryptedFile) == ".txt")
+            string outputFilePath;
+            byte[] inputBytes = File.ReadAllBytes(inputFile);
+            byte[] outputBytes = new byte[inputBytes.Length];
+            outputFilePath = outputPath + @"\output" + Path.GetExtension(inputFile);
+            for (int i = 0; i < inputBytes.Length; i++)
             {
-                FilesWork.LoadTextFile(Crypting.DecryptText(FilesWork.ReadTextFile(encryptedFile), args), originalFile); 
-                return;
+                int inputByte = inputBytes[i];
+                int outputByte;
+                if (crypt == Crypt.Encrypt)
+                {
+                    if (key is string)
+                    {
+                        outputByte = (inputByte + Equation(i, (string)key)) % 256;
+                    }
+                    else
+                    {
+                        outputByte = (inputByte + Equation(i, (int[])key)) % 256;
+                    }
+                }
+                else
+                {
+                    if (key is string)
+                    {
+                        outputByte = (inputByte - Equation(i, (string)key)) % 256;
+                    }
+                    else
+                    {
+                        outputByte = (inputByte - Equation(i, (int[])key)) % 256;
+                    }
+                }
+                outputBytes[i] = (byte)outputByte;
             }
-            for (int i = 0; i < encryptedBytes.Length; i++)
-            {
-
-                originalBytes[i] = (byte)(encryptedBytes[i] - Equation(i, args) % 255);
-            }
-            File.WriteAllBytes(originalFile, originalBytes);
+            File.WriteAllBytes(outputFilePath, outputBytes);
         }
 
-        public static void EncryptNonText(string originalFile, string encryptedPath, string slogan)
-        {
-            string encryptedFile = encryptedPath + @"\encrypted" + Path.GetExtension(originalFile);
-            byte[] originalBytes = File.ReadAllBytes(originalFile);
-            byte[] encryptedBytes = new byte[originalBytes.Length];
-            if (Path.GetExtension(originalFile) == ".txt")
-            {
-                FilesWork.LoadTextFile(Crypting.EncryptText(FilesWork.ReadTextFile(originalFile), slogan), encryptedFile);
-                return;
-            }
-            for (int i = 0; i < originalBytes.Length; i++)
-            {
-                encryptedBytes[i] = (byte)(originalBytes[i] + Equation(i, slogan) % 255);
-            }
-            File.WriteAllBytes(encryptedFile, encryptedBytes);
-        }
-
-        public static void DecryptNonText(string encryptedFile, string originalPath, string slogan)
-        {
-            string originalFile = originalPath + @"\decrypted" + Path.GetExtension(encryptedFile);
-            byte[] encryptedBytes = File.ReadAllBytes(encryptedFile);
-            byte[] originalBytes = new byte[encryptedBytes.Length];
-
-            if (Path.GetExtension(encryptedFile) == ".txt")
-            {
-                FilesWork.LoadTextFile(Crypting.DecryptText(FilesWork.ReadTextFile(encryptedFile), slogan), originalFile);
-                return;
-            }
-            for (int i = 0; i < encryptedBytes.Length; i++)
-            {
-
-                originalBytes[i] = (byte)(encryptedBytes[i] - Equation(i, slogan) % 255);
-            }
-            File.WriteAllBytes(originalFile, originalBytes);
-        }
-
-        public static string EncryptText(string plainText, int[] args)
+        public static string CryptText(Crypt crypt, string plainText, object key)
         {
             string cipherText = "";
             int position = 0;
-            foreach (char c in plainText)
+            if (crypt == Crypt.Encrypt)
             {
-                int charCode = c; 
-                charCode = (charCode + Equation(position, args)) % PowerOfUnicode; 
-                cipherText += (char)charCode;
-                position++;
+                foreach (char c in plainText)
+                {
+                    int charCode = c;
+                    if (key is int[])
+                    {
+                        int[] args = (int[])key;
+                        charCode = (charCode + Equation(position, args)) % 65536;
+                    }
+                    else if (key is string)
+                    {
+                        string slogan = (string)key;
+                        charCode = (charCode + Equation(position, slogan)) % 65536;
+                    }
+                    cipherText += (char)charCode;
+                    position++;
+                }
             }
-            return cipherText; 
-        }
-
-        public static string DecryptText(string cipherText, int[] args)
-        {
-            string plainText = "";
-            int position = 0;
-            foreach (char c in cipherText)
+            else
             {
-                int charCode = c;
-                charCode = (charCode + PowerOfUnicode - (Equation(position, args) % PowerOfUnicode)) % PowerOfUnicode;
-                plainText += (char)charCode;
-                position++;
-            }
-            return plainText;
-        }
-
-        public static string EncryptText(string plainText, string slogan)
-        {
-            string cipherText = "";
-            int position = 0;
-            foreach (char c in plainText)
-            {
-                int charCode = c;
-                charCode = (charCode + Equation(position, slogan)) % PowerOfUnicode;
-                cipherText += (char)charCode;
-                position++;
+                foreach (char c in plainText)
+                {
+                    int charCode = c;
+                    if (key is int[])
+                    {
+                        int[] args = (int[])key;
+                        charCode = (charCode - Equation(position, args)) % 65536;
+                    }
+                    else if (key is string)
+                    {
+                        string slogan = (string)key;
+                        charCode = (charCode - Equation(position, slogan)) % 65536;
+                    }
+                    cipherText += (char)charCode;
+                    position++;
+                }
             }
             return cipherText;
-        }
-
-        public static string DecryptText(string cipherText, string slogan)
-        {
-            string plainText = "";
-            int position = 0;
-            foreach (char c in cipherText)
-            {
-                int charCode = c;
-                charCode = (charCode + PowerOfUnicode - (Equation(position, slogan) % PowerOfUnicode)) % PowerOfUnicode;
-                plainText += (char)charCode;
-                position++;
-            }
-            return plainText;
         }
 
         private static int Equation(int position, int[] args)

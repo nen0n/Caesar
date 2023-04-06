@@ -60,7 +60,14 @@
         <TextBox Name ="EncryptText_KeyText" HorizontalAlignment="Left" Margin="502,121,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" Visibility="Hidden" TextChanged="EncryptText_KeyText_TextChanged"/>
         <TextBlock Name ="EncryptText_Encrypt" HorizontalAlignment="Left" Margin="100,248,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.519,1.544" Text="Зашифрований текст:" Visibility="Hidden"/>
         <TextBox Name ="EncryptText_EncryptedText" HorizontalAlignment="Left" Margin="100,289,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="110" Width="376" Visibility="Hidden"/>
-
+        <Button Name ="EncryptText_Button" Content="Розшифрувати" HorizontalAlignment="Left" Height="34" Margin="502,289,0,0" VerticalAlignment="Top" Width="97" Click="EncryptText_Button_Click" Visibility="Hidden">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF3D8FC0" Offset="0.827"/>
+                    <GradientStop Color="#FF77C6F6" Offset="0.447"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
         <Button Name ="DecryptTextButton" HorizontalAlignment="Left" Margin="200,0,0,0" VerticalAlignment="Top" Width="100" Height="40" Click="DecryptTextButton_Click">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -84,7 +91,14 @@
         <TextBox Name ="DecryptText_KeyText" HorizontalAlignment="Left" Margin="502,121,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" Visibility="Hidden" TextChanged="DecryptText_KeyText_TextChanged"/>
         <TextBlock x:Name ="DecryptText_Decrypt" HorizontalAlignment="Left" Margin="100,248,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.519,1.544" Visibility="Hidden"><Run Language="ru-ru" Text="Розшифрований текст:"/></TextBlock>
         <TextBox Name ="DecryptText_DecryptedText" HorizontalAlignment="Left" Margin="100,289,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="110" Width="376" Visibility="Hidden"/>
-
+        <Button Name ="DecryptText_Button" Content="Зашифрувати" HorizontalAlignment="Left" Height="34" Margin="502,289,0,0" VerticalAlignment="Top" Width="97" Click="DecryptText_Button_Click" Visibility="Hidden">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF3D8FC0" Offset="0.827"/>
+                    <GradientStop Color="#FF77C6F6" Offset="0.447"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
         <Button Name ="EncryptFileButton" HorizontalAlignment="Left" Margin="300,0,0,0" VerticalAlignment="Top" Width="100" Height="40" Click="EncryptFileButton_Click">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">

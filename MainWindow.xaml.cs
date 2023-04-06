@@ -16,9 +16,6 @@ namespace Caesar
         private string pattern_only_numbers = @"\d+(,\d+)*";
         private string pattern_for_slogan = @"^\w+$";
 
-
-
-
         public MainWindow()
         {
             InitializeComponent();
@@ -34,6 +31,7 @@ namespace Caesar
             EncryptText_KeyText.Visibility = Visibility.Hidden;
             EncryptText_Text.Visibility = Visibility.Hidden;
             EncryptText_TextBlock.Visibility = Visibility.Hidden;
+            EncryptText_Button.Visibility = Visibility.Hidden;
 
             DecryptText_Decrypt.Visibility = Visibility.Hidden;
             DecryptText_DecryptedText.Visibility = Visibility.Hidden;
@@ -41,6 +39,7 @@ namespace Caesar
             DecryptText_KeyText.Visibility = Visibility.Hidden;
             DecryptText_Text.Visibility = Visibility.Hidden;
             DecryptText_TextBlock.Visibility = Visibility.Hidden;
+            DecryptText_Button.Visibility = Visibility.Hidden;
 
             DecryptFile_ChooseInputButton.Visibility = Visibility.Hidden;
             DecryptFile_ChooseOutputButton.Visibility = Visibility.Hidden;
@@ -99,7 +98,8 @@ namespace Caesar
         {
             if (Regex.IsMatch(EncryptText_KeyText.Text, pattern_for_slogan))
             {
-                EncryptText_EncryptedText.Text = Crypting.EncryptText(EncryptText_Text.Text, EncryptText_KeyText.Text);
+                EncryptText_Button.Visibility = Visibility.Visible;
+                EncryptText_EncryptedText.Text = Crypting.CryptText(Crypting.Crypt.Encrypt, EncryptText_Text.Text, EncryptText_KeyText.Text);
             }
             else
             {
@@ -111,17 +111,20 @@ namespace Caesar
                     {
                         try
                         {
+                            EncryptText_Button.Visibility = Visibility.Visible;
                             numbers[i] = int.Parse(substrings[i].Trim());
-                            EncryptText_EncryptedText.Text = Crypting.EncryptText(EncryptText_Text.Text, numbers);
+                            EncryptText_EncryptedText.Text = Crypting.CryptText(Crypting.Crypt.Encrypt, EncryptText_Text.Text, numbers);
                         }
                         catch (Exception)
                         {
+                            EncryptText_Button.Visibility = Visibility.Hidden;
                             EncryptText_EncryptedText.Text = "";
                         }
                     }
                 }
                 else
                 {
+                    EncryptText_Button.Visibility = Visibility.Hidden;
                     EncryptText_EncryptedText.Text = "";
                 }
             }
@@ -131,7 +134,8 @@ namespace Caesar
         {
             if (Regex.IsMatch(EncryptText_KeyText.Text, pattern_for_slogan))
             {
-                EncryptText_EncryptedText.Text = Crypting.EncryptText(EncryptText_Text.Text, EncryptText_KeyText.Text);
+                EncryptText_Button.Visibility = Visibility.Visible;
+                EncryptText_EncryptedText.Text = Crypting.CryptText(Crypting.Crypt.Encrypt, EncryptText_Text.Text, EncryptText_KeyText.Text);
             }
             else
             {
@@ -143,17 +147,20 @@ namespace Caesar
                     {
                         try
                         {
+                            EncryptText_Button.Visibility = Visibility.Visible;
                             numbers[i] = int.Parse(substrings[i].Trim());
-                            EncryptText_EncryptedText.Text = Crypting.EncryptText(EncryptText_Text.Text, numbers);
+                            EncryptText_EncryptedText.Text = Crypting.CryptText(Crypting.Crypt.Encrypt, EncryptText_Text.Text, numbers);
                         }
                         catch (Exception)
                         {
+                            EncryptText_Button.Visibility = Visibility.Hidden;
                             EncryptText_EncryptedText.Text = "";
                         }
                     }
                }
                else
                {
+                    EncryptText_Button.Visibility = Visibility.Hidden;
                     EncryptText_EncryptedText.Text = "";
                }
             }
@@ -176,7 +183,8 @@ namespace Caesar
         {
             if (Regex.IsMatch(DecryptText_KeyText.Text, pattern_for_slogan))
             {
-                DecryptText_DecryptedText.Text = Crypting.DecryptText(DecryptText_Text.Text, DecryptText_KeyText.Text);
+                DecryptText_Button.Visibility = Visibility.Visible;
+                DecryptText_DecryptedText.Text = Crypting.CryptText(Crypting.Crypt.Decrypt, DecryptText_Text.Text, DecryptText_KeyText.Text);
             }
             else
             {
@@ -188,17 +196,20 @@ namespace Caesar
                     {
                         try
                         {
+                            DecryptText_Button.Visibility = Visibility.Visible;
                             numbers[i] = int.Parse(substrings[i].Trim());
-                            DecryptText_DecryptedText.Text = Crypting.DecryptText(DecryptText_Text.Text, numbers);
+                            DecryptText_DecryptedText.Text = Crypting.CryptText(Crypting.Crypt.Decrypt, DecryptText_Text.Text, numbers);
                         }
                         catch (Exception)
                         {
+                            DecryptText_Button.Visibility = Visibility.Hidden;
                             DecryptText_DecryptedText.Text = "";
                         }
                     }
                 }
                 else
                 {
+                    DecryptText_Button.Visibility = Visibility.Hidden;
                     DecryptText_DecryptedText.Text = "";
                 }
             }
@@ -208,7 +219,8 @@ namespace Caesar
         {
             if (Regex.IsMatch(DecryptText_KeyText.Text, pattern_for_slogan))
             {
-                DecryptText_DecryptedText.Text = Crypting.DecryptText(DecryptText_Text.Text, DecryptText_KeyText.Text);
+                DecryptText_Button.Visibility = Visibility.Visible;
+                DecryptText_DecryptedText.Text = Crypting.CryptText(Crypting.Crypt.Decrypt, DecryptText_Text.Text, DecryptText_KeyText.Text);
             }
             else
             {
@@ -220,17 +232,20 @@ namespace Caesar
                     {
                         try
                         {
+                            DecryptText_Button.Visibility = Visibility.Visible;
                             numbers[i] = int.Parse(substrings[i].Trim());
-                            DecryptText_DecryptedText.Text = Crypting.DecryptText(DecryptText_Text.Text, numbers);
+                            DecryptText_DecryptedText.Text = Crypting.CryptText(Crypting.Crypt.Decrypt, DecryptText_Text.Text, numbers);
                         }
                         catch (Exception)
                         {
+                            DecryptText_Button.Visibility = Visibility.Hidden;
                             DecryptText_DecryptedText.Text = "";
                         }
                     }
                 }
                 else
                 {
+                    DecryptText_Button.Visibility = Visibility.Hidden;
                     DecryptText_DecryptedText.Text = "";
                 }
             }
@@ -299,7 +314,7 @@ namespace Caesar
             if (Regex.IsMatch(EncryptFile_KeyText.Text, pattern_for_slogan))
             {
                 EncryptFile_ChooseOutputButton.IsEnabled = true;
-                Crypting.EncryptNonText(selectedInputFile, selectedOutputPath, EncryptFile_KeyText.Text);
+                Crypting.CryptNonText(Crypting.Crypt.Encrypt, selectedInputFile, selectedOutputPath, EncryptFile_KeyText.Text);
             }
             if (Regex.IsMatch(EncryptFile_KeyText.Text, pattern_only_numbers))
             {
@@ -310,7 +325,7 @@ namespace Caesar
                 {
                     numbers[i] = int.Parse(substrings[i].Trim());
                 }
-                Crypting.EncryptNonText(selectedInputFile, selectedOutputPath, numbers);
+                Crypting.CryptNonText(Crypting.Crypt.Encrypt, selectedInputFile, selectedOutputPath, numbers);
             }
             AllClear();
         }
@@ -377,7 +392,7 @@ namespace Caesar
             AllInvisible();
             if (Regex.IsMatch(DecryptFile_KeyText.Text, pattern_for_slogan))
             {
-                Crypting.DecryptNonText(selectedInputFile, selectedOutputPath, DecryptFile_KeyText.Text);
+                Crypting.CryptNonText(Crypting.Crypt.Decrypt, selectedInputFile, selectedOutputPath, DecryptFile_KeyText.Text);
             }
             if (Regex.IsMatch(DecryptFile_KeyText.Text, pattern_only_numbers))
             {
@@ -387,7 +402,7 @@ namespace Caesar
                 {
                     numbers[i] = int.Parse(substrings[i].Trim());
                 }
-                Crypting.DecryptNonText(selectedInputFile, selectedOutputPath, numbers);
+                Crypting.CryptNonText(Crypting.Crypt.Decrypt, selectedInputFile, selectedOutputPath, numbers);
             }
             AllClear();
         }
@@ -395,6 +410,28 @@ namespace Caesar
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        private void EncryptText_Button_Click(object sender, RoutedEventArgs e)
+        {
+            string key = EncryptText_KeyText.Text;
+            string text = EncryptText_EncryptedText.Text;
+            AllClear();
+            AllInvisible();
+            DecryptTextButton_Click(sender, e);
+            DecryptText_KeyText.Text = key;
+            DecryptText_Text.Text = text;
+        }
+
+        private void DecryptText_Button_Click(object sender, RoutedEventArgs e)
+        {
+            string key = DecryptText_KeyText.Text;
+            string text = DecryptText_DecryptedText.Text;
+            AllClear();
+            AllInvisible();
+            EncryptTextButton_Click(sender, e);
+            EncryptText_KeyText.Text = key;
+            EncryptText_Text.Text = text;
         }
     }
 }
