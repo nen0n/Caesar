@@ -20,31 +20,28 @@ namespace Caesar
             outputFilePath = outputPath + @"\output (" + DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss") +")"+ Path.GetExtension(inputFile);
             for (int i = 0; i < inputBytes.Length; i++)
             {
-                int inputByte = inputBytes[i];
-                int outputByte;
                 if (crypt == Crypt.Encrypt)
                 {
                     if (key is string)
                     {
-                        outputByte = (inputByte + Equation(i, (string)key)) % 256;
+                        outputBytes[i] =(byte)((inputBytes[i] + Equation(i, (string)key)) % 256);
                     }
                     else
                     {
-                        outputByte = (inputByte + Equation(i, (int[])key)) % 256;
+                        outputBytes[i] = (byte)((inputBytes[i] + Equation(i, (int[])key)) % 256);
                     }
                 }
                 else
                 {
                     if (key is string)
                     {
-                        outputByte = (inputByte - Equation(i, (string)key)) % 256;
+                        outputBytes[i] = (byte)((inputBytes[i] - Equation(i, (string)key)) % 256);
                     }
                     else
                     {
-                        outputByte = (inputByte - Equation(i, (int[])key)) % 256;
+                        outputBytes[i] = (byte)((inputBytes[i] - Equation(i, (int[])key)) % 256);
                     }
                 }
-                outputBytes[i] = (byte)outputByte;
             }
             File.WriteAllBytes(outputFilePath, outputBytes);
         }
@@ -53,9 +50,9 @@ namespace Caesar
         {
             string cipherText = "";
             int position = 0;
-            if (crypt == Crypt.Encrypt)
+            foreach (char c in plainText)
             {
-                foreach (char c in plainText)
+                if (crypt == Crypt.Encrypt)
                 {
                     int charCode = c;
                     if (key is int[])
@@ -71,10 +68,7 @@ namespace Caesar
                     cipherText += (char)charCode;
                     position++;
                 }
-            }
-            else
-            {
-                foreach (char c in plainText)
+                else
                 {
                     int charCode = c;
                     if (key is int[])

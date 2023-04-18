@@ -96,31 +96,31 @@ namespace Caesar
 
         private void EncryptText_Text_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
-            if (Regex.IsMatch(EncryptText_KeyText.Text, pattern_for_slogan))
+            if (Regex.IsMatch(EncryptText_KeyText.Text, pattern_only_numbers))
             {
-                EncryptText_Button.Visibility = Visibility.Visible;
-                EncryptText_EncryptedText.Text = Crypting.CryptText(Crypting.Crypt.Encrypt, EncryptText_Text.Text, EncryptText_KeyText.Text);
+                string[] substrings = EncryptText_KeyText.Text.Split(',');
+                int[] numbers = new int[substrings.Length];
+                for (int i = 0; i < substrings.Length; i++)
+                {
+                    try
+                    {
+                        EncryptText_Button.Visibility = Visibility.Visible;
+                        numbers[i] = int.Parse(substrings[i].Trim());
+                        EncryptText_EncryptedText.Text = Crypting.CryptText(Crypting.Crypt.Encrypt, EncryptText_Text.Text, numbers);
+                    }
+                    catch (Exception)
+                    {
+                        EncryptText_Button.Visibility = Visibility.Hidden;
+                        EncryptText_EncryptedText.Text = "";
+                    }
+                }
             }
             else
             {
-                if (Regex.IsMatch(EncryptText_KeyText.Text, pattern_only_numbers))
+                if (Regex.IsMatch(EncryptText_KeyText.Text, pattern_for_slogan))
                 {
-                    string[] substrings = EncryptText_KeyText.Text.Split(',');
-                    int[] numbers = new int[substrings.Length];
-                    for (int i = 0; i < substrings.Length; i++)
-                    {
-                        try
-                        {
-                            EncryptText_Button.Visibility = Visibility.Visible;
-                            numbers[i] = int.Parse(substrings[i].Trim());
-                            EncryptText_EncryptedText.Text = Crypting.CryptText(Crypting.Crypt.Encrypt, EncryptText_Text.Text, numbers);
-                        }
-                        catch (Exception)
-                        {
-                            EncryptText_Button.Visibility = Visibility.Hidden;
-                            EncryptText_EncryptedText.Text = "";
-                        }
-                    }
+                    EncryptText_Button.Visibility = Visibility.Visible;
+                    EncryptText_EncryptedText.Text = Crypting.CryptText(Crypting.Crypt.Encrypt, EncryptText_Text.Text, EncryptText_KeyText.Text);
                 }
                 else
                 {
@@ -132,37 +132,37 @@ namespace Caesar
 
         private void EncryptText_KeyText_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
-            if (Regex.IsMatch(EncryptText_KeyText.Text, pattern_for_slogan))
+            if (Regex.IsMatch(EncryptText_KeyText.Text, pattern_only_numbers))
             {
-                EncryptText_Button.Visibility = Visibility.Visible;
-                EncryptText_EncryptedText.Text = Crypting.CryptText(Crypting.Crypt.Encrypt, EncryptText_Text.Text, EncryptText_KeyText.Text);
+                string[] substrings = EncryptText_KeyText.Text.Split(',');
+                int[] numbers = new int[substrings.Length];
+                for (int i = 0; i < substrings.Length; i++)
+                {
+                    try
+                    {
+                        EncryptText_Button.Visibility = Visibility.Visible;
+                        numbers[i] = int.Parse(substrings[i].Trim());
+                        EncryptText_EncryptedText.Text = Crypting.CryptText(Crypting.Crypt.Encrypt, EncryptText_Text.Text, numbers);
+                    }
+                    catch (Exception)
+                    {
+                        EncryptText_Button.Visibility = Visibility.Hidden;
+                        EncryptText_EncryptedText.Text = "";
+                    }
+                }
             }
             else
             {
-               if(Regex.IsMatch(EncryptText_KeyText.Text, pattern_only_numbers))
-               {
-                    string[] substrings = EncryptText_KeyText.Text.Split(',');
-                    int[] numbers = new int[substrings.Length];
-                    for (int i = 0; i < substrings.Length; i++)
-                    {
-                        try
-                        {
-                            EncryptText_Button.Visibility = Visibility.Visible;
-                            numbers[i] = int.Parse(substrings[i].Trim());
-                            EncryptText_EncryptedText.Text = Crypting.CryptText(Crypting.Crypt.Encrypt, EncryptText_Text.Text, numbers);
-                        }
-                        catch (Exception)
-                        {
-                            EncryptText_Button.Visibility = Visibility.Hidden;
-                            EncryptText_EncryptedText.Text = "";
-                        }
-                    }
-               }
-               else
-               {
+                if (Regex.IsMatch(EncryptText_KeyText.Text, pattern_for_slogan))
+                {
+                    EncryptText_Button.Visibility = Visibility.Visible;
+                    EncryptText_EncryptedText.Text = Crypting.CryptText(Crypting.Crypt.Encrypt, EncryptText_Text.Text, EncryptText_KeyText.Text);
+                }
+                else
+                {
                     EncryptText_Button.Visibility = Visibility.Hidden;
                     EncryptText_EncryptedText.Text = "";
-               }
+                }
             }
         }
 
