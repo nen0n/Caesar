@@ -181,31 +181,31 @@ namespace Caesar
 
         private void DecryptText_Text_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
-            if (Regex.IsMatch(DecryptText_KeyText.Text, pattern_for_slogan))
+            if (Regex.IsMatch(DecryptText_KeyText.Text, pattern_only_numbers))
             {
-                DecryptText_Button.Visibility = Visibility.Visible;
-                DecryptText_DecryptedText.Text = Crypting.CryptText(Crypting.Crypt.Decrypt, DecryptText_Text.Text, DecryptText_KeyText.Text);
+                string[] substrings = DecryptText_KeyText.Text.Split(',');
+                int[] numbers = new int[substrings.Length];
+                for (int i = 0; i < substrings.Length; i++)
+                {
+                    try
+                    {
+                        DecryptText_Button.Visibility = Visibility.Visible;
+                        numbers[i] = int.Parse(substrings[i].Trim());
+                        DecryptText_DecryptedText.Text = Crypting.CryptText(Crypting.Crypt.Decrypt, DecryptText_Text.Text, numbers);
+                    }
+                    catch (Exception)
+                    {
+                        DecryptText_Button.Visibility = Visibility.Hidden;
+                        DecryptText_DecryptedText.Text = "";
+                    }
+                }
             }
             else
             {
-                if (Regex.IsMatch(DecryptText_KeyText.Text, pattern_only_numbers))
+                if (Regex.IsMatch(DecryptText_KeyText.Text, pattern_for_slogan))
                 {
-                    string[] substrings = DecryptText_KeyText.Text.Split(',');
-                    int[] numbers = new int[substrings.Length];
-                    for (int i = 0; i < substrings.Length; i++)
-                    {
-                        try
-                        {
-                            DecryptText_Button.Visibility = Visibility.Visible;
-                            numbers[i] = int.Parse(substrings[i].Trim());
-                            DecryptText_DecryptedText.Text = Crypting.CryptText(Crypting.Crypt.Decrypt, DecryptText_Text.Text, numbers);
-                        }
-                        catch (Exception)
-                        {
-                            DecryptText_Button.Visibility = Visibility.Hidden;
-                            DecryptText_DecryptedText.Text = "";
-                        }
-                    }
+                    DecryptText_Button.Visibility = Visibility.Visible;
+                    DecryptText_DecryptedText.Text = Crypting.CryptText(Crypting.Crypt.Decrypt, DecryptText_Text.Text, DecryptText_KeyText.Text);
                 }
                 else
                 {
@@ -217,31 +217,31 @@ namespace Caesar
 
         private void DecryptText_KeyText_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
-            if (Regex.IsMatch(DecryptText_KeyText.Text, pattern_for_slogan))
+            if (Regex.IsMatch(DecryptText_KeyText.Text, pattern_only_numbers))
             {
-                DecryptText_Button.Visibility = Visibility.Visible;
-                DecryptText_DecryptedText.Text = Crypting.CryptText(Crypting.Crypt.Decrypt, DecryptText_Text.Text, DecryptText_KeyText.Text);
+                string[] substrings = DecryptText_KeyText.Text.Split(',');
+                int[] numbers = new int[substrings.Length];
+                for (int i = 0; i < substrings.Length; i++)
+                {
+                    try
+                    {
+                        DecryptText_Button.Visibility = Visibility.Visible;
+                        numbers[i] = int.Parse(substrings[i].Trim());
+                        DecryptText_DecryptedText.Text = Crypting.CryptText(Crypting.Crypt.Decrypt, DecryptText_Text.Text, numbers);
+                    }
+                    catch (Exception)
+                    {
+                        DecryptText_Button.Visibility = Visibility.Hidden;
+                        DecryptText_DecryptedText.Text = "";
+                    }
+                }
             }
             else
             {
-                if (Regex.IsMatch(DecryptText_KeyText.Text, pattern_only_numbers))
+                if (Regex.IsMatch(DecryptText_KeyText.Text, pattern_for_slogan))
                 {
-                    string[] substrings = DecryptText_KeyText.Text.Split(',');
-                    int[] numbers = new int[substrings.Length];
-                    for (int i = 0; i < substrings.Length; i++)
-                    {
-                        try
-                        {
-                            DecryptText_Button.Visibility = Visibility.Visible;
-                            numbers[i] = int.Parse(substrings[i].Trim());
-                            DecryptText_DecryptedText.Text = Crypting.CryptText(Crypting.Crypt.Decrypt, DecryptText_Text.Text, numbers);
-                        }
-                        catch (Exception)
-                        {
-                            DecryptText_Button.Visibility = Visibility.Hidden;
-                            DecryptText_DecryptedText.Text = "";
-                        }
-                    }
+                    DecryptText_Button.Visibility = Visibility.Visible;
+                    DecryptText_DecryptedText.Text = Crypting.CryptText(Crypting.Crypt.Decrypt, DecryptText_Text.Text, DecryptText_KeyText.Text);
                 }
                 else
                 {
@@ -278,11 +278,11 @@ namespace Caesar
         private void EncryptFile_KeyText_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
             EncryptFile_ChooseOutputButton.Visibility = Visibility.Hidden;
-            if (Regex.IsMatch(EncryptFile_KeyText.Text, pattern_for_slogan))
+            if (Regex.IsMatch(EncryptFile_KeyText.Text, pattern_only_numbers))
             {
                 EncryptFile_ChooseOutputButton.Visibility = Visibility.Visible;
             }
-            if (Regex.IsMatch(EncryptFile_KeyText.Text, pattern_only_numbers))
+            if (Regex.IsMatch(EncryptFile_KeyText.Text, pattern_for_slogan))
             {
                 EncryptFile_ChooseOutputButton.Visibility = Visibility.Visible;
             }
@@ -311,11 +311,6 @@ namespace Caesar
         private void EncryptFile_EncryptButton_Click(object sender, RoutedEventArgs e)
         {
             AllInvisible();
-            if (Regex.IsMatch(EncryptFile_KeyText.Text, pattern_for_slogan))
-            {
-                EncryptFile_ChooseOutputButton.IsEnabled = true;
-                Crypting.CryptNonText(Crypting.Crypt.Encrypt, selectedInputFile, selectedOutputPath, EncryptFile_KeyText.Text);
-            }
             if (Regex.IsMatch(EncryptFile_KeyText.Text, pattern_only_numbers))
             {
                 EncryptFile_ChooseOutputButton.IsEnabled = true;
@@ -326,6 +321,11 @@ namespace Caesar
                     numbers[i] = int.Parse(substrings[i].Trim());
                 }
                 Crypting.CryptNonText(Crypting.Crypt.Encrypt, selectedInputFile, selectedOutputPath, numbers);
+            }
+            if (Regex.IsMatch(EncryptFile_KeyText.Text, pattern_for_slogan))
+            {
+                EncryptFile_ChooseOutputButton.IsEnabled = true;
+                Crypting.CryptNonText(Crypting.Crypt.Encrypt, selectedInputFile, selectedOutputPath, EncryptFile_KeyText.Text);
             }
             AllClear();
         }
@@ -356,11 +356,11 @@ namespace Caesar
         private void DecryptFile_KeyText_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
             DecryptFile_ChooseOutputButton.Visibility = Visibility.Hidden;
-            if (Regex.IsMatch(DecryptFile_KeyText.Text, pattern_for_slogan))
+            if (Regex.IsMatch(DecryptFile_KeyText.Text, pattern_only_numbers))
             {
                 DecryptFile_ChooseOutputButton.Visibility = Visibility.Visible;
             }
-            if (Regex.IsMatch(DecryptFile_KeyText.Text, pattern_only_numbers))
+            if (Regex.IsMatch(DecryptFile_KeyText.Text, pattern_for_slogan))
             {
                 DecryptFile_ChooseOutputButton.Visibility = Visibility.Visible;
             }
@@ -377,7 +377,6 @@ namespace Caesar
             openFileDialog.DereferenceLinks = true;
             openFileDialog.FileName = "Select";
 
-
             if (openFileDialog.ShowDialog() == true)
             {
                 selectedOutputPath = System.IO.Path.GetDirectoryName(openFileDialog.FileName);
@@ -390,10 +389,6 @@ namespace Caesar
         private void DecryptFile_DecryptButton_Click(object sender, RoutedEventArgs e)
         {
             AllInvisible();
-            if (Regex.IsMatch(DecryptFile_KeyText.Text, pattern_for_slogan))
-            {
-                Crypting.CryptNonText(Crypting.Crypt.Decrypt, selectedInputFile, selectedOutputPath, DecryptFile_KeyText.Text);
-            }
             if (Regex.IsMatch(DecryptFile_KeyText.Text, pattern_only_numbers))
             {
                 string[] substrings = DecryptFile_KeyText.Text.Split(',');
@@ -403,6 +398,10 @@ namespace Caesar
                     numbers[i] = int.Parse(substrings[i].Trim());
                 }
                 Crypting.CryptNonText(Crypting.Crypt.Decrypt, selectedInputFile, selectedOutputPath, numbers);
+            }
+            if (Regex.IsMatch(DecryptFile_KeyText.Text, pattern_for_slogan))
+            {
+                Crypting.CryptNonText(Crypting.Crypt.Decrypt, selectedInputFile, selectedOutputPath, DecryptFile_KeyText.Text);
             }
             AllClear();
         }
