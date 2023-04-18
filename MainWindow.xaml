@@ -13,6 +13,10 @@
                 <GradientStop Color="White" Offset="0.314"/>
             </LinearGradientBrush>
         </Grid.Background>
+
+
+        <!--Інформація про розробника-->
+
         <Button Name ="InfoButton" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="100" Height="40" Click="InfoButton_Click">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -38,6 +42,9 @@
             <Run Text="Ангеліна Забловська"/>
         </TextBlock>
 
+
+        <!-- Шифрування тексту-->
+
         <Button Name ="EncryptTextButton" HorizontalAlignment="Left" Margin="100,0,0,0" VerticalAlignment="Top" Width="100" Height="40" Click="EncryptTextButton_Click">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -54,10 +61,20 @@
                 </TextBlock>
             </StackPanel>
         </Button>
+
+        <TextBlock Name="EncryptText_Type_Text" HorizontalAlignment="Left" Margin="503,163,0,0" TextWrapping="Wrap" Text="Тип шифрування" VerticalAlignment="Top" Visibility="Hidden"/>
+        <ComboBox Name="EncryptText_Type" HorizontalAlignment="Left" Margin="502,197,0,0" VerticalAlignment="Top" Width="150" Visibility="Hidden" DropDownClosed="EncryptText_Type_DropDownClosed">
+            <ComboBoxItem>
+                Шифр Цезаря
+            </ComboBoxItem>
+            <ComboBoxItem>
+                Шифр Тритеміуса
+            </ComboBoxItem>
+        </ComboBox>
         <TextBlock x:Name ="EncryptText_TextBlock" HorizontalAlignment="Left" Margin="100,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.519,1.544" Text="Текст для шифрування:" Visibility="Hidden"/>
         <TextBox Name ="EncryptText_Text" HorizontalAlignment="Left" Margin="100,121,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="376" Height="110" Visibility="Hidden" TextChanged="EncryptText_Text_TextChanged"/>
         <TextBlock Name ="EncryptText_KeyBlock" HorizontalAlignment="Left" Margin="502,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.442,-0.261" Text="Ключ" Visibility="Hidden"/>
-        <TextBox Name ="EncryptText_KeyText" HorizontalAlignment="Left" Margin="502,121,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" Visibility="Hidden" TextChanged="EncryptText_KeyText_TextChanged"/>
+        <TextBox Name ="EncryptText_KeyText" HorizontalAlignment="Left" Margin="502,121,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" TextChanged="EncryptText_KeyText_TextChanged" Visibility="Hidden"/>
         <TextBlock Name ="EncryptText_Encrypt" HorizontalAlignment="Left" Margin="100,248,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.519,1.544" Text="Зашифрований текст:" Visibility="Hidden"/>
         <TextBox Name ="EncryptText_EncryptedText" HorizontalAlignment="Left" Margin="100,289,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="110" Width="376" Visibility="Hidden"/>
         <Button Name ="EncryptText_Button" Content="Розшифрувати" HorizontalAlignment="Left" Height="34" Margin="502,289,0,0" VerticalAlignment="Top" Width="97" Click="EncryptText_Button_Click" Visibility="Hidden">
@@ -68,6 +85,10 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
+
+
+        <!--Розшифрування тексту-->
+
         <Button Name ="DecryptTextButton" HorizontalAlignment="Left" Margin="200,0,0,0" VerticalAlignment="Top" Width="100" Height="40" Click="DecryptTextButton_Click">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -85,6 +106,15 @@
             </StackPanel>
         </Button>
 
+        <TextBlock Name="DecryptText_Type_Text" HorizontalAlignment="Left" Margin="503,163,0,0" TextWrapping="Wrap" Text="Тип шифрування" VerticalAlignment="Top" Visibility="Hidden"/>
+        <ComboBox Name="DecryptText_Type" HorizontalAlignment="Left" Margin="502,197,0,0" VerticalAlignment="Top" Width="150" Visibility="Hidden" DropDownClosed="DecryptText_Type_DropDownClosed">
+            <ComboBoxItem>
+                Шифр Цезаря
+            </ComboBoxItem>
+            <ComboBoxItem>
+                Шифр Тритеміуса
+            </ComboBoxItem>
+        </ComboBox>
         <TextBox Name ="DecryptText_Text" HorizontalAlignment="Left" Margin="100,121,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="376" Height="110" Visibility="Hidden" TextChanged="DecryptText_Text_TextChanged"/>
         <TextBlock x:Name ="DecryptText_TextBlock" HorizontalAlignment="Left" Margin="100,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Visibility="Hidden"><Run Text="Текст для "/><Run Text="роз"/><Run Language="ru-ru" Text="ши"/><Run Text="фрування:"/></TextBlock>
         <TextBlock Name ="DecryptText_KeyBlock" HorizontalAlignment="Left" Margin="502,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Ключ" Visibility="Hidden"/>
@@ -99,6 +129,10 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
+
+
+        <!--Шифрування файлу-->
+
         <Button Name ="EncryptFileButton" HorizontalAlignment="Left" Margin="300,0,0,0" VerticalAlignment="Top" Width="100" Height="40" Click="EncryptFileButton_Click">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -116,6 +150,15 @@
             </StackPanel>
         </Button>
 
+        <TextBlock Name="EncryptFile_Type_Text" HorizontalAlignment="Left" Margin="373,159,0,0" TextWrapping="Wrap" Text="Тип шифрування" VerticalAlignment="Top" Visibility="Hidden"/>
+        <ComboBox Name="EncryptFile_Type" HorizontalAlignment="Left" Margin="502,153,0,0" VerticalAlignment="Top" Width="150" Visibility="Hidden" DropDownClosed="EncryptFile_Type_DropDownClosed">
+            <ComboBoxItem>
+                Шифр Цезаря
+            </ComboBoxItem>
+            <ComboBoxItem>
+                Шифр Тритеміуса
+            </ComboBoxItem>
+        </ComboBox>
         <Button Name = "EncryptFile_ChooseInputButton" Content="Вибір&#xD;&#xA;файлу" HorizontalAlignment="Left" Margin="100,88,0,0" VerticalAlignment="Top" Height="40" Width="100" Click="EncryptFile_ChooseInputButton_Click" Visibility="Hidden">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -144,6 +187,8 @@
         </Button>
 
 
+        <!--Розшифрування файлу-->
+
         <Button Name ="DecryptFileButton" HorizontalAlignment="Left" Margin="400,0,0,0" VerticalAlignment="Top" Width="100" Height="40" Click="DecryptFileButton_Click">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -161,6 +206,15 @@
             </StackPanel>
         </Button>
 
+        <TextBlock Name="DecryptFile_Type_Text" HorizontalAlignment="Left" Margin="373,159,0,0" TextWrapping="Wrap" Text="Тип шифрування" VerticalAlignment="Top" Visibility="Hidden"/>
+        <ComboBox Name="DecryptFile_Type" HorizontalAlignment="Left" Margin="502,153,0,0" VerticalAlignment="Top" Width="150" DropDownClosed="DecryptFile_Type_DropDownClosed" Visibility="Hidden">
+            <ComboBoxItem>
+                Шифр Цезаря
+            </ComboBoxItem>
+            <ComboBoxItem>
+                Шифр Тритеміуса
+            </ComboBoxItem>
+        </ComboBox>
         <Button Name = "DecryptFile_ChooseInputButton" Content="Вибір&#xD;&#xA;файлу" HorizontalAlignment="Left" Margin="100,88,0,0" VerticalAlignment="Top" Height="40" Width="100" Click="DecryptFile_ChooseInputButton_Click" Visibility="Hidden">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -189,6 +243,8 @@
         </Button>
 
 
+        <!--Вихід-->
+
         <Button Name ="ExitButton" HorizontalAlignment="Right" Margin="700,0,0,0" VerticalAlignment="Top" Width="100" Height="40" Click="ExitButton_Click">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -207,3 +263,4 @@
         </Button>
     </Grid>
 </Window>
+

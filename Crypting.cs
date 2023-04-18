@@ -6,83 +6,161 @@ namespace Caesar
 {
     class Crypting
     {
+        public enum Type
+        {
+            Caesar,
+            Tritemius
+        }
+
         public enum Crypt
         {
             Encrypt,
             Decrypt
         }
 
-        public static void CryptNonText(Crypt crypt, string inputFile, string outputPath, object key) 
+        public static void CryptNonText(Crypt crypt, Type type, string inputFile, string outputPath, object key)
         {
             string outputFilePath;
             byte[] inputBytes = File.ReadAllBytes(inputFile);
             byte[] outputBytes = new byte[inputBytes.Length];
-            outputFilePath = outputPath + @"\output (" + DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss") +")"+ Path.GetExtension(inputFile);
-            for (int i = 0; i < inputBytes.Length; i++)
+            outputFilePath = outputPath + @"\output (" + DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss") + ")" + Path.GetExtension(inputFile);
+            if (type == Type.Caesar)
             {
                 if (crypt == Crypt.Encrypt)
                 {
-                    if (key is string)
-                    {
-                        outputBytes[i] =(byte)((inputBytes[i] + Equation(i, (string)key)) % 256);
-                    }
-                    else
+                    for (int i = 0; i < inputBytes.Length; i++)
                     {
                         outputBytes[i] = (byte)((inputBytes[i] + Equation(i, (int[])key)) % 256);
                     }
                 }
-                else
+                if (crypt == Crypt.Decrypt)
                 {
-                    if (key is string)
-                    {
-                        outputBytes[i] = (byte)((inputBytes[i] - Equation(i, (string)key)) % 256);
-                    }
-                    else
+                    for (int i = 0; i < inputBytes.Length; i++)
                     {
                         outputBytes[i] = (byte)((inputBytes[i] - Equation(i, (int[])key)) % 256);
+                    }
+                }
+            }
+            if (type == Type.Tritemius)
+            {
+                if (crypt == Crypt.Encrypt)
+                {
+                    if (key is int[])
+                    {
+                        for (int i = 0; i < inputBytes.Length; i++)
+                        {
+                            outputBytes[i] = (byte)((inputBytes[i] + Equation(i, (int[])key)) % 256);
+                        }
+                    }
+                    if (key is string)
+                    {
+                        for (int i = 0; i < inputBytes.Length; i++)
+                        {
+                            outputBytes[i] = (byte)((inputBytes[i] + Equation(i, (string)key)) % 256);
+                        }
+                    }
+                }
+                if (crypt == Crypt.Decrypt)
+                {
+                    if (key is int[])
+                    {
+                        for (int i = 0; i < inputBytes.Length; i++)
+                        {
+                            outputBytes[i] = (byte)((inputBytes[i] - Equation(i, (int[])key)) % 256);
+                        }
+                    }
+                    if (key is string)
+                    {
+                        for (int i = 0; i < inputBytes.Length; i++)
+                        {
+                            outputBytes[i] = (byte)((inputBytes[i] - Equation(i, (string)key)) % 256);
+                        }
                     }
                 }
             }
             File.WriteAllBytes(outputFilePath, outputBytes);
         }
 
-        public static string CryptText(Crypt crypt, string plainText, object key)
+        public static string CryptText(Crypt crypt, Type type, string plainText, object key)
         {
             string cipherText = "";
             int position = 0;
-            foreach (char c in plainText)
+            if (type == Type.Caesar)
             {
                 if (crypt == Crypt.Encrypt)
                 {
-                    int charCode = c;
-                    if (key is int[])
+                    foreach (char c in plainText)
                     {
+                        int charCode = c;
                         int[] args = (int[])key;
                         charCode = (charCode + Equation(position, args)) % 65536;
+                        cipherText += (char)charCode;
+                        position++;
                     }
-                    else if (key is string)
-                    {
-                        string slogan = (string)key;
-                        charCode = (charCode + Equation(position, slogan)) % 65536;
-                    }
-                    cipherText += (char)charCode;
-                    position++;
                 }
-                else
+                if (crypt == Crypt.Decrypt)
                 {
-                    int charCode = c;
-                    if (key is int[])
+                    foreach (char c in plainText)
                     {
+                        int charCode = c;
                         int[] args = (int[])key;
                         charCode = (charCode - Equation(position, args)) % 65536;
+                        cipherText += (char)charCode;
+                        position++;
                     }
-                    else if (key is string)
+                }
+            }
+            if (type == Type.Tritemius)
+            {
+                if (crypt == Crypt.Encrypt)
+                {
+                    if (key is int[])
                     {
-                        string slogan = (string)key;
-                        charCode = (charCode - Equation(position, slogan)) % 65536;
+                        foreach (char c in plainText)
+                        {
+                            int charCode = c;
+                            int[] args = (int[])key;
+                            charCode = (charCode + Equation(position, args)) % 65536;
+                            cipherText += (char)charCode;
+                            position++;
+                        }
                     }
-                    cipherText += (char)charCode;
-                    position++;
+                    if (key is string)
+                    {
+                        foreach (char c in plainText)
+                        {
+                            int charCode = c;
+                            string slogan = (string)key;
+                            charCode = (charCode + Equation(position, slogan)) % 65536;
+                            cipherText += (char)charCode;
+                            position++;
+                        }
+                    }
+                }
+                if (crypt == Crypt.Decrypt)
+                {
+                    if (key is int[])
+                    {
+                        foreach (char c in plainText)
+                        {
+                            int charCode = c;
+                            int[] args = (int[])key;
+                            charCode = (charCode - Equation(position, args)) % 65536;
+                            cipherText += (char)charCode;
+                            position++;
+                        }
+                    }
+                    if (key is string)
+                    {
+                        foreach (char c in plainText)
+                        {
+                            int charCode = c;
+                            string slogan = (string)key;
+                            charCode = (charCode - Equation(position, slogan)) % 65536;
+                            cipherText += (char)charCode;
+                            position++;
+                        }
+                    }
                 }
             }
             return cipherText;
@@ -102,7 +180,7 @@ namespace Caesar
 
         private static int Equation(int position, string slogan)
         {
-            return slogan[position % slogan.Length]; 
+            return slogan[position % slogan.Length];
         }
     }
 }
