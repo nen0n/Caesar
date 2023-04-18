@@ -17,7 +17,7 @@ namespace Caesar
             string outputFilePath;
             byte[] inputBytes = File.ReadAllBytes(inputFile);
             byte[] outputBytes = new byte[inputBytes.Length];
-            outputFilePath = outputPath + @"\output" + Path.GetExtension(inputFile);
+            outputFilePath = outputPath + @"\output (" + DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss") +")"+ Path.GetExtension(inputFile);
             for (int i = 0; i < inputBytes.Length; i++)
             {
                 int inputByte = inputBytes[i];
